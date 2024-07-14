@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.1'
     id 'io.spring.dependency-management' version '1.1.5'
+    id 'org.springdoc.openapi-gradle-plugin' version "1.9.0"
+    id "org.openapi.generator" version "7.7.0"
 }
 
 group = 'com.usermanagement'
@@ -31,9 +33,29 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0' // Add springdoc dependency
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// OpenAPI tasks configuration
+openApi {
+    apiDocsUrl.set("http://localhost:8080/v3/api-docs")
+    outputDir.set(layout.buildDirectory.dir("/generated"))
+    outputFileName.set("openapi.json")
+    waitTimeInSeconds.set(10)
+}
+
+// Generate TypeScript client using OpenAPI Generator
+openApiGenerate {
+    generatorName = "typescript-axios"
+    inputSpec = layout.buildDirectory.dir("/generated/openapi.json").get().toString()
+//    outputDir = layout.buildDirectory.dir("/generated/typescript-axios").get().toString()
+    outputDir = layout.buildDirectory.dir("../../FE/typescript-axios").get().toString()
+    apiPackage = "com.usermanagement.api"
+    modelPackage = "com.usermanagement.model"
+    additionalProperties = [supportsES6: "true"]
+}
+
