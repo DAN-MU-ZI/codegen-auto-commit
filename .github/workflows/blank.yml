@@ -41,6 +41,8 @@ jobs:
       run: ls -l ./gradle
     - name: Show directories
       run: ls -l ./build
+    - name: Show directories
+      run: ls -l ./build/generated
 
     - name: Build with Gradle
       run: ./gradlew nameOfTest
