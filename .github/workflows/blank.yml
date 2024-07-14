@@ -17,9 +17,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./swagger-backend/
+    
     steps:
     - name: Checkout sources
       uses: actions/checkout@v4
@@ -31,6 +29,12 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
     - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+      run: chmod +x ./swagger-backend/gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./swagger-backend/gradlew build
+
+    - name: Generate Api Docs
+      run: ./swagger-backend/gradlew generateOpenApiDocs
+
+    - name: Generate Client Library
+      run: ./swagger-backend/gradlew openApiGenerate    
