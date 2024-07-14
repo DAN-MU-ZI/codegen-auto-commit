@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout sources
       uses: actions/checkout@v4
@@ -32,9 +32,3 @@ jobs:
       run: chmod +x ./swagger-backend/gradlew
     - name: Build with Gradle
       run: ./swagger-backend/gradlew build
-
-    - name: Generate Api Docs
-      run: ./swagger-backend/gradlew generateOpenApiDocs
-
-    - name: Generate Client Library
-      run: ./swagger-backend/gradlew openApiGenerate    
