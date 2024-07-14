@@ -17,11 +17,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./swagger-backend/
+    defaults:
+      run:
+        working-directory: ./swagger-backend/
     steps:
-    - name: show ls
-      run: ls -l
     - name: Checkout sources
       uses: actions/checkout@v4
     - name: Setup Java
