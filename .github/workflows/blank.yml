@@ -37,6 +37,10 @@ jobs:
 
     - name: Show directories
       run: ls -l
+    - name: Show directories
+      run: ls -l ./gradle
+    - name: Show directories
+      run: ls -l ./build
     
     - name: Generate OpenApiDocs
       run: ./gradlew generateOpenApiDocs
