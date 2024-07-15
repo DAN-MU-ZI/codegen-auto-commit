@@ -52,15 +52,8 @@ openApi {
 openApiGenerate {
     generatorName = "typescript-axios"
     inputSpec = layout.buildDirectory.dir("./generated/openapi.json").get().toString()
-//    outputDir = layout.buildDirectory.dir("/generated/typescript-axios").get().toString()
     outputDir = layout.buildDirectory.dir("../../FE/typescript-axios").get().toString()
     apiPackage = "com.usermanagement.api"
     modelPackage = "com.usermanagement.model"
     additionalProperties = [supportsES6: "true"]
-}
-
-def buildDir = layout.buildDirectory.toString();
-
-tasks.register("nameOfTest") {
-    println(buildDir)
 }
