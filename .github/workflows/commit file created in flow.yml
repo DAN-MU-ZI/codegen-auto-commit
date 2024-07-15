@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Create a temporary file
+      run: |
+        mkdir -p /home/runner/work/codegen-auto-commit/codegen-auto-commit/FE/typescript-axios
+        echo "This is a temporary file" > /home/runner/work/codegen-auto-commit/codegen-auto-commit/FE/typescript-axios/tempfile.txt
+
+    - name: Commit and push changes
+      run: |
+        cd /home/runner/work/codegen-auto-commit/codegen-auto-commit/FE/typescript-axios
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "Add temporary file"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
