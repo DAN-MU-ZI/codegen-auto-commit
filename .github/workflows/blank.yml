@@ -38,3 +38,7 @@ jobs:
       run: ./gradlew generateOpenApiDocs
     - name: Generate Client Libraray
       run: ./gradlew openApiGenerate
+    - name: Show directories
+      run: ls -l ./build
+    - name: Show directories
+      run: ls -l ./build/generated
